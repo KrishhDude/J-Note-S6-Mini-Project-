@@ -1,0 +1,23 @@
+pip3 install virtualenv
+virtualenv -p python3 env
+source env/bin/activate
+pip install django
+django-admin startproject mysite
+cd mysite/
+python3 manage.py startapp polls
+python3 manage.py runserver
+python3 manage.py makemigrations polls(after adding polls to apps.py INSTALLED_APPS)
+python3 manage.py makemigrations polls
+python3 manage.py migrate
+
+#to populate db
+python3 manage.py shell
+>>>import django
+>>> django.setup()
+>>> from polls.models import Question,Choice
+>>> Question.objects.all()
+<QuerySet []>
+>>> from django.utils import timezone
+>>> q = Question(question_text="whats your name", pub_date=timezone.now())
+>>> q.save()
+ 
